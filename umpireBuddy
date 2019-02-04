@@ -1,0 +1,217 @@
+package Novin.A;
+
+
+
+
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+//import android.app.AlertDialog;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+
+public class MainActivity extends AppCompatActivity {
+    int CounterStrike = 0;
+    int CounterBall = 0;
+    TextView StrikeRTxt;
+    TextView BallRTxt;
+    Button StrikeBt;
+    Button BallBt;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //declare the button & textView id
+        StrikeRTxt = (TextView) findViewById(R.id.StrikeRTxt);
+        BallRTxt = (TextView) findViewById(R.id.BallRTxt);
+        StrikeBt = (Button) findViewById(R.id.StrikeBt);
+        BallBt = (Button) findViewById(R.id.BallBt);
+
+
+        StrikeBt.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                CounterStrike++;     //each click will increase number of strike
+                // StrikeRTxt.setText(String.valueOf(CounterStrike)); // convert string to int
+                StrikeRTxt.setText(Integer.toString(CounterStrike));
+
+                //case of 3 strike == out
+                if (CounterStrike == 3) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Out");
+                    builder.setNegativeButton("OK", null);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    CounterStrike = 0;
+                    CounterBall = 0;
+                    //  StrikeRTxt.setText(String.valueOf(CounterStrike));
+                    StrikeRTxt.setText(Integer.toString(CounterStrike));
+                    BallRTxt.setText(Integer.toString(CounterBall));
+
+                    //BallRTxt.setText(String.valueOf(CounterBall));
+
+                }
+
+
+            }
+        });
+
+
+        //click Ball button
+        BallBt.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                CounterBall++;     //each click will increase number of strike
+                BallRTxt.setText(Integer.toString(CounterBall));
+
+
+                //case of 5 Ball == out
+
+                if (CounterBall == 4) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Out");
+                    builder.setNegativeButton("OK", null);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    CounterStrike = 0;
+                    CounterBall = 0;
+                    StrikeRTxt.setText(Integer.toString(CounterStrike));
+                    BallRTxt.setText(Integer.toString(CounterBall));
+
+                    // BallRTxt.setText(String.valueOf(CounterBall));
+                    //StrikeRTxt.setText(String.valueOf(CounterStrike));
+
+
+                }
+            }
+        });
+    }
+}
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<android.support.constraint.ConstraintLayout tools:context="com.example.Novin.A.MainActivity" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/black">
+
+
+
+
+    <TextView
+        android:layout_height="wrap_content"
+
+        android:layout_width="wrap_content"
+        app:layout_constraintVertical_bias="0.14999998"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintBottom_toTopOf="@+id/BallBt"
+        android:textSize="30sp"
+        android:text="Strike:"
+        android:layout_marginTop="83dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/StrikeTxt"
+
+        android:textColor="@android:color/white"
+
+        />
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintVertical_bias="0.935"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintBottom_toTopOf="@+id/StrikeTxt"
+        android:textSize="30sp" android:text="Ball:"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/BallTxt"
+        android:textColor="@android:color/white"
+        />
+
+    <Button android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Strike"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="152dp"
+        android:id="@+id/StrikeBt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintVertical_bias="0.997"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/StrikeBt"
+        android:text="Ball" android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:id="@+id/BallBt"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/BallRTxt"
+        android:layout_width="26dp"
+
+        android:layout_height="wrap_content"
+
+        android:text="0"
+
+
+        android:textSize="30sp"
+        app:layout_constraintleft_toRightOf="WrapCounter"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.25"
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="70dp"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/StrikeRTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="280dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/BallBt"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintLeft_toRightOf="@+id/StrikeTxt"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/white"
+        />
+
+</android.support.constraint.ConstraintLayout>
+
